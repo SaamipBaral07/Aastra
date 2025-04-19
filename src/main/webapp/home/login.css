@@ -1,0 +1,53 @@
+/* Style for the entire container */
+.container {
+    display: flex;
+    justify-content: space-between;
+    min-height: 100vh;
+}
+
+/* Left panel for the login form */
+.left-panel {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* To position the logo */
+}
+
+/* Right panel for branding/logo */
+.right-panel {
+    flex: 1;
+    background-image: url('images/loginpage.png'); /* Replace with your background image */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white; /* Ensure the text is visible on top of the background */
+    padding: 20px;
+}
+
+
+/* Position the logo on the left side of the left panel */
+.logo-container {
+    position: absolute;
+    top: 20px;  /* Distance from the top */
+    left: 25px; /* Distance from the left side */
+}
+
+/* Logo styling - make it bigger */
+.logo-container img {
+    max-width: 500px; /* Increase the size of the logo */
+}
+
+/* Hover effect for the buttons */
+.btn-hover {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-hover:hover {
+    background-color: #0056b3; /* Adjust to your preferred color */
+    transform: scale(1.05); /* Slightly increase size on hover */
+}

@@ -7,7 +7,7 @@ User user = (User) session.getAttribute("userWithSession");
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>FashionWave - Dashboard</title>
+    <title> VaasTra- Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
     <style>
@@ -23,7 +23,7 @@ User user = (User) session.getAttribute("userWithSession");
 </head>
 <body>
     <header>
-        <div class="logo">AasTra</div>
+        <div class="logo">VaasTra</div>
         <nav>
             <ul>
                 <li><a href="#">Home</a></li>
