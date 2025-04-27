@@ -12,9 +12,9 @@
       href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@200;400;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="main.css"/>
   </head>
-  <body>
+   <body>
     <div class="overlay"></div>
     <div class="wrapper">
       <header>
@@ -24,33 +24,37 @@
           <ul>
             <li><a href="#" class="active">Home</a></li>
             <li><a href="#">Products</a></li>
-            <li><a href="#">Categories</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#">Contact</a></li> 
           </ul>
         </nav>
-        <div class="navbar-icons">
-  		<button class="icon-button" title="Search">
-    	<img src="images/search-icon.jpg" alt="Search" />
+
+	<div class="navbar-icons">
+  		<button class="icon-button" title="Search" onclick="toggleSearchBar()">
+    		<img src="images/search-icon.jpg" alt="Search" />
   		</button>
-  		<button class="icon-button" title="Cart">
-    	<img src="images/cart-icon.png" alt="Cart" />
+  		<button class="icon-button" title="Cart" onclick="goToCart()">
+   			 <img src="images/cart-icon.png" alt="Cart" />
   		</button>
-</div>      
+  		<button class="icon-button" title="User Profile" onclick="goToUserProfile()">
+   		 <img src="images/user-icon.jpg" alt="User" />
+  		</button>
+	</div>
+
+        <div class="search-bar-container" id="searchBar">
+          <input type="text" placeholder="Search..." />
+        </div>
       </header>
 
       <main>
         <div class="left-col">
           <h1>Dress Bold. Stay Real. Be You.</h1>
           <p class="subhead">
-  			Wear your vibe, not just a brand — VaasTra makes every outfit count
-			</p>
+            Wear your vibe, not just a brand — VaasTra makes every outfit count
+          </p>
 
           <div class="cta-btns">
             <a href="#" class="primary-cta">Browse our collection</a>
-
-            <a href="#" class="secondary-cta">
-              <span>Latest Added Collection</span>
-            </a>
+            <a href="#" class="secondary-cta"><span>Latest Added Collection</span></a>
           </div>
 
           <div class="news">
@@ -61,11 +65,12 @@
             </p>
           </div>
         </div>
+
         <div class="right-col">
           <div class="card card1">
             <div class="card-details">
               <div>
-                <a href="#" class="product-title"> Women Tank Tops</a>
+                <a href="#" class="product-title">Women Tank Tops</a>
                 <p>Authentic Cotton</p>
               </div>
               <p class="product-price">$59.99</p>
@@ -75,7 +80,7 @@
             <div class="card-details">
               <div>
                 <a href="#" class="product-title">Kids Sporty Hoodies</a>
-                <p>Unisex Hoddies- GREY</p>
+                <p>Unisex Hoodies - GREY</p>
               </div>
               <p class="product-price">$60</p>
             </div>
@@ -90,10 +95,160 @@
             </div>
           </div>
         </div>
-      </main>
-    </div>
-    <jsp:include page="footer.jsp" />
+        </main>
+		<!-- Top Picks Section (Full Width Below Main Content) -->
+<section class="top-picks-section">
+  <h2>Top Picks</h2>
+  <div class="top-picks-container">
     
-  </body>
+    <div class="top-pick-card">
+      <img src="images/top1.webp" alt="Top Pick 1">
+      <div class="top-pick-info">
+        <p class="product-name"> Vanarasi Lehenga</p>
+        <p class="price">$45.00</p>
+        <p class="stock">In Stock: 12</p>
+      </div>
+    </div>
+
+    <div class="top-pick-card">
+      <img src="images/top2.jpg" alt="Top Pick 2">
+      <div class="top-pick-info">
+        <p class="product-name">Pure Leather Jacket</p>
+        <p class="price">$75.99</p>
+        <p class="stock">In Stock: 7</p>
+      </div>
+    </div>
+
+    <div class="top-pick-card">
+      <img src="images/top3.webp" alt="Top Pick 3">
+      <div class="top-pick-info">
+        <p class="product-name">Comfy Woman Tees</p>
+        <p class="price">$38.50</p>
+        <p class="stock">In Stock: 20</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+		
+    <jsp:include page="footer.jsp" />
+    </div>
+    
+    <script>
+  function toggleSearchBar() {
+    const searchBar = document.getElementById('searchBar');
+    searchBar.classList.toggle('show');
+  }
+
+  function goToCart() {
+    window.location.href = 'cart.jsp';
+  }
+  function goToUserProfile() {
+	    window.location.href = "userprofile.jsp";
+	  }
+</script>
+<style>
+.search-bar-container {
+  position: absolute;
+  top: 80px; /* Adjust based on your header height */
+  right: -400px;
+  background-color: white;
+  padding: 10px 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  transition: right 0.5s ease;
+  z-index: 1000;
+}
+
+.search-bar-container input[type="text"] {
+  padding: 10px;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.search-bar-container.show {
+  right: 20px;
+}
+/* Ensure main content layout stays side-by-side */
+.main-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 2em;
+}
+.icon-button img {
+  width: 40px; 
+  height: 40px;
+  transition: transform 0.2s ease-in-out;
+}
+/* Top Picks below main-content, full-width */
+.top-picks-section {
+  margin-top: 5em;
+  padding: 2em;
+}
+
+.top-picks-section h2 {
+  font-size: 2.8rem;
+  margin-bottom: 1em;
+  text-align: center;
+  font-family: "Playfair Display";
+}
+
+.top-picks-container {
+  display: flex;
+  gap: 2em;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.top-pick-card {
+  background: #fff;
+  border-radius: 1em;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  width: 250px;
+  transition: transform 0.3s ease;
+}
+
+.top-pick-card:hover {
+  transform: translateY(-10px);
+}
+
+.top-pick-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.top-pick-info {
+  padding: 1em;
+  text-align: center;
+}
+
+/* New styles for product name */
+.top-pick-info .product-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  color: #333;
+  font-family: "Playfair Display", serif;
+}
+
+.top-pick-info .price {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.top-pick-info .stock {
+  font-size: 1.4rem;
+  color: #666;
+}
+
+
+
+</style>
+</body>
 </html>
 

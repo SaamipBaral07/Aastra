@@ -17,28 +17,40 @@ public class UserDAO {
 	}
 	// Registers a new user in the database
 	public boolean register(User user) {
-		boolean isUserRegistered = false;
-		// SQL statement to insert user details
-		String query = "INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)";
-		if (conn != null) {
-			try {
-				ps = conn.prepareStatement(query);
-				ps.setString(1, user.getUserName());
-				ps.setString(2, user.getEmail());
-				ps.setString(3, user.getPassword()); // TODO Passwords should be hashed in real-world apps
-				ps.setString(4, user.getRole());
-				
-				// Execute the insert query
-				if (ps.executeUpdate() > 0) {
-					isUserRegistered = true;
-				}
-			} catch (SQLException e) {
-				// TODO Good for debugging; can be replaced with proper logging
-				e.printStackTrace();
-			}
-		}
-		return isUserRegistered;
+	    boolean isUserRegistered = false;
+
+	    if (conn != null) {
+	        try {
+	            // Step 1: Check if email already exists
+	            String checkQuery = "SELECT email FROM users WHERE email = ?";
+	            ps = conn.prepareStatement(checkQuery);
+	            ps.setString(1, user.getEmail());
+	            ResultSet rs = ps.executeQuery();
+
+	            if (rs.next()) {
+	                // Email already exists in the database
+	                return false;
+	            }
+
+	            // Step 2: If email is unique, insert the user
+	            String insertQuery = "INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)";
+	            ps = conn.prepareStatement(insertQuery);
+	            ps.setString(1, user.getUserName());
+	            ps.setString(2, user.getEmail());
+	            ps.setString(3, user.getPassword()); // Note: Hash in real world
+	            ps.setString(4, user.getRole());
+
+	            if (ps.executeUpdate() > 0) {
+	                isUserRegistered = true;
+	            }
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    return isUserRegistered;
 	}
+
 	// get all the users from database
 	public ArrayList<User> getAllUsers() {
 		ArrayList<User> users = new ArrayList<>();
@@ -94,4 +106,24 @@ public class UserDAO {
 		}
 		return user;// Returns null if no match found and returns the user info if user the user was found in database
 	}
+	// Updates the username of a user by userId
+	public boolean updateUsername(int userId, String newUsername) {
+	    boolean isUpdated = false;
+	    String query = "UPDATE users SET username = ? WHERE user_id = ?";
+
+	    try {
+	        ps = conn.prepareStatement(query);
+	        ps.setString(1, newUsername);
+	        ps.setInt(2, userId);
+
+	        int rowsAffected = ps.executeUpdate();
+	        if (rowsAffected > 0) {
+	            isUpdated = true;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return isUpdated;
+	}
+
 }

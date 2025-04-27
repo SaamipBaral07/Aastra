@@ -11,10 +11,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Your custom CSS -->
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/home/login.css">
+    
 </head>
 <body>
     <div class="container">
+   
         <!-- Left Panel: Login Form -->
         <div class="left-panel">
             <!-- Logo on the left side -->
@@ -26,12 +28,18 @@
                 <h3 class="text-center">Log In</h3>
 
                 <!-- Error Message Display --> 
-                <c:if test="${not empty errorMessage}">
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        ${errorMessage}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                </c:if>
+                <% 
+    String errorMessage = (String) session.getAttribute("errorMessage");
+    if (errorMessage != null) {
+%>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%= errorMessage %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<%
+       session.removeAttribute("errorMessage"); // Clear message after showing
+    }
+%>
 
                 <form action="${pageContext.request.contextPath}/LoginServlet" method="post">
                     <div class="mb-3">

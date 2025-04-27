@@ -33,8 +33,10 @@ public class RegisterServlet extends HttpServlet {
 				request.setAttribute("successMessage", "Registration successful. You can now log in.");
 				request.getRequestDispatcher("/home/login.jsp").forward(request, response);
 			} else {
-				request.setAttribute("errorMessage", "Registration failed. Email may already exist.");
-				request.getRequestDispatcher("/home/register.jsp").forward(request, response);
+				request.getSession().setAttribute("errorMessage", "Email already exists");
+				response.sendRedirect("home/register.jsp");
+				return;
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

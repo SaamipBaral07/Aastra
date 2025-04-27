@@ -18,9 +18,22 @@
             <div class="logo-container">
                 <img src="images/small_llogo.png" alt="Brand Logo" class="brand-logo">
             </div>
-
+            
             <div class="card p-4 shadow" style="width: 25rem;">
                 <h3 class="text-center">Register</h3>
+                 <%
+    	String errorMessage = (String) session.getAttribute("errorMessage");
+    	if (errorMessage != null) {
+	%>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%= errorMessage %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<%
+        session.removeAttribute("errorMessage"); // Clear after showing
+    }
+%>
+   
                 <c:if test="${not empty errorMessage}">
                     <div class="alert alert-danger">${errorMessage}</div>
                 </c:if>
