@@ -12,7 +12,7 @@
       href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@200;400;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="main.css"/>
+    <link rel="stylesheet" href="css/main.css"/>
   </head>
    <body>
     <div class="overlay"></div>
@@ -131,9 +131,9 @@
   </div>
 </section>
 
-		
+	</div>	
     <jsp:include page="footer.jsp" />
-    </div>
+    
     
     <script>
   function toggleSearchBar() {
@@ -150,17 +150,18 @@
 </script>
 <style>
 .search-bar-container {
+  display: none; /* hide by default */
   position: absolute;
-  top: 80px; /* Adjust based on your header height */
-  right: -400px;
+  top: 80px; /* adjust based on your header height */
+  right: 20px;
   background-color: white;
   padding: 10px 20px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   border-radius: 8px;
-  transition: right 0.5s ease;
+  transition: opacity 0.3s ease;
+  opacity: 0;
   z-index: 1000;
 }
-
 .search-bar-container input[type="text"] {
   padding: 10px;
   width: 250px;
@@ -168,9 +169,9 @@
   border-radius: 5px;
   font-size: 16px;
 }
-
 .search-bar-container.show {
-  right: 20px;
+  display: block;
+  opacity: 1;
 }
 /* Ensure main content layout stays side-by-side */
 .main-content {

@@ -5,10 +5,10 @@
     min-height: 100vh;
 }
 
-/* Left panel for the login form */
+/* Left panel for the registration form */
 .left-panel {
     flex: 1;
-    padding: 20px;
+    padding: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,7 +18,7 @@
 /* Right panel for branding/logo */
 .right-panel {
     flex: 1;
-    background-image: url('images/loginpage.png'); /* Replace with your background image */
+    background-image: url('../images/loginpage.png'); /* Replace with your background image */
     background-size: cover;
     background-position: center;
     display: flex;
@@ -33,13 +33,13 @@
 /* Position the logo on the left side of the left panel */
 .logo-container {
     position: absolute;
-    top: 20px;  /* Distance from the top */
-    left: 25px; /* Distance from the left side */
+    top: 0px;  /* Distance from the top */
+    left: 35px; /* Distance from the left side */
 }
 
 /* Logo styling - make it bigger */
 .logo-container img {
-    max-width: 500px; /* Increase the size of the logo */
+    max-width: 440px; /* Increase the size of the logo */
 }
 
 /* Hover effect for the buttons */
