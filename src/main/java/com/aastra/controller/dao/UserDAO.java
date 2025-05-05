@@ -125,5 +125,32 @@ public class UserDAO {
 	    }
 	    return isUpdated;
 	}
+	public ArrayList<User> getAllCustomers() {
+	    ArrayList<User> customers = new ArrayList<>();
+	    String query = "SELECT * FROM users WHERE role = 'CUSTOMER'";
+
+	    if (conn != null) {
+	        try {
+	            ps = conn.prepareStatement(query);
+	            ResultSet userSet = ps.executeQuery();
+
+	            while (userSet.next()) {
+	                User user = new User();
+	                user.setUserId(userSet.getInt("user_id"));
+	                user.setUserName(userSet.getString("username"));
+	                user.setEmail(userSet.getString("email"));
+	                user.setPassword(userSet.getString("password"));
+	                user.setRole(userSet.getString("role"));
+	                user.setCreatedAt(userSet.getTimestamp("created_at"));
+	                customers.add(user);
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return customers;
+	}
+
 
 }

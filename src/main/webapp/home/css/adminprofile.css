@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+/* Update Username Form Styles */
+.update-username-form {
+    background-color: var(--form-bg, #f8f9fa);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px; /* Increased space below the form */
+    border: 1px solid var(--border-color, #e1e4e8);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-color, #333);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color, #e1e4e8);
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    background-color: white;
+    color: var(--text-color, #333);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color, #3a86ff);
+    box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.2);
+}
+
+.update-username-form .btn {
+    margin-top: 10px; /* Increased from 5px to 10px */
+    text-align: center;
+    padding: 12px;
+}
+
+/* Buttons section with improved spacing */
+.buttons {
+    margin-top: 20px; /* Add top margin to create space */
+    display: flex;
+    gap: 15px; /* Space between buttons */
+    padding-top: 10px; /* Extra padding at top */
+    border-top: 1px solid var(--border-light-color, #eaeaea); /* Optional divider line */
+}
+
+/* Button styling */
+.btn {
+	color:red;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn i {
+    margin-right: 8px;
+}
+
+.btn-primary {
+    background-color: var(--primary-color, #3a86ff);
+    color: white;
+    border: none;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color, #f0f0f0);
+    color: var(--text-color, #333);
+    border: 1px solid var(--border-color, #ddd);
+}
+
+.btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* Make the logout form display correctly */
+.logout-form {
+    display: inline;
+}

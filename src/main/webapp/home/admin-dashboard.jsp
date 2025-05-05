@@ -31,21 +31,31 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
-                        </span>
-                        <span class="title">Customers</span>
-                    </a>
-                </li>
+                <a href="${pageContext.request.contextPath}/CustomerServlet">
+                 <span class="icon">
+                 <ion-icon name="people-outline"></ion-icon>
+                </span>
+                 <span class="title">Customers</span>
+               </a>
+              </li>
+
                 <li>
-                    <a href="#">
+   <a href="${pageContext.request.contextPath}/AdminProductServlet">
+        <span class="icon">
+            <ion-icon name="cube-outline"></ion-icon>
+        </span>
+        <span class="title">Products</span>
+    </a>
+</li>
+<li>
+                    <a href="orders.jsp">
                         <span class="icon">
-                            <ion-icon name="pricetag-outline"></ion-icon>
+                            <ion-icon name="cart-outline"></ion-icon>
                         </span>
-                        <span class="title">Products</span>
+                        <span class="title">Orders</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="#">
                         <span class="icon">
@@ -71,7 +81,10 @@
                 </div>
 
                 <div class="user">
-                    <ion-icon name="person-circle-outline"></ion-icon>
+                <a href="${pageContext.request.contextPath}/home/admin-profile.jsp" title="Admin Profile Page">
+                     <ion-icon name="person-circle-outline" style="font-size: 24px; color: #444;"></ion-icon>
+                </a>
+
                 </div>
             </div>
 
