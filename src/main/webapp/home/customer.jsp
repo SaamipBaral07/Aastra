@@ -88,8 +88,11 @@
                 </div>
                 
                 <!-- User Image -->
-                <div class="user">
-                    <ion-icon name="person-circle-outline"></ion-icon>
+                 <div class="user">
+                <a href="${pageContext.request.contextPath}/home/admin-profile.jsp" title="Admin Profile Page">
+                     <ion-icon name="person-circle-outline" style="font-size: 24px; color: #444;"></ion-icon>
+                </a>
+
                 </div>
             </div>
 
@@ -118,9 +121,8 @@
             <td>${user.userId}</td>
             <td>${user.userName}</td>
             <td>${user.email}</td>
-            <td>
-                <span class="status customer">Customer</span>
-            </td>
+           	<td>${user.role}</td>
+          
             <td>${user.createdAt}</td>
             <td>
                 <!-- View icon for future use -->

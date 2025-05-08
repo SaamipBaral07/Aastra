@@ -5,6 +5,7 @@ import com.aastra.model.Product;
 import com.aastra.controller.database.DBConnect;
 
 import java.sql.*;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -125,6 +126,61 @@ public class ProductDAO {
             e.printStackTrace();
         }
     }
+    public boolean addProduct(Product p) {
+        String insertProduct = "INSERT INTO products (name, description, price, stock, category_id) VALUES (?, ?, ?, ?, ?)";
+        String insertImage = "INSERT INTO product_images (product_id, image_url) VALUES (?, ?)";
+
+        try (Connection conn = DBConnect.getConnection()) {
+            conn.setAutoCommit(false); // Start transaction
+
+            // Insert product
+            try (PreparedStatement ps = conn.prepareStatement(insertProduct, Statement.RETURN_GENERATED_KEYS)) {
+                ps.setString(1, p.getName());
+                ps.setString(2, p.getDescription());
+                ps.setDouble(3, p.getPrice());
+                ps.setInt(4, p.getStock());
+                if (p.getCategoryId() > 0) {
+                    ps.setInt(5, p.getCategoryId());
+                } else {
+                    ps.setNull(5, Types.INTEGER); // NULL if no category selected
+                }
+
+                int affectedRows = ps.executeUpdate();
+                if (affectedRows == 0) {
+                    conn.rollback();
+                    throw new SQLException("Inserting product failed, no rows affected.");
+                }
+
+                // Get the generated product_id
+                try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        int productId = generatedKeys.getInt(1);
+                        p.setProductId(productId); // Set it back to the object
+                    } else {
+                        conn.rollback();
+                        throw new SQLException("Inserting product failed, no ID obtained.");
+                    }
+                }
+            }
+
+            // Insert image URL
+            try (PreparedStatement psImg = conn.prepareStatement(insertImage)) {
+                psImg.setInt(1, p.getProductId());
+                psImg.setString(2, p.getImageUrl());
+                psImg.executeUpdate();
+            }
+
+            conn.commit(); // Commit transaction
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    }
 
 
-} 
+   
+
+ 

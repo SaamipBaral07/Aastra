@@ -83,7 +83,7 @@
                 <div class="recentOrders">
                     <div class="cardHeader">
                         <h2>Product Management</h2>
-                        <a href="${pageContext.request.contextPath}/AddProductServlet" class="btn-add">
+                        <a href="${pageContext.request.contextPath}/home/addproduct.jsp" class="btn-add">
                             <ion-icon name="add-circle-outline"></ion-icon>
                             Add New Product
                         </a>

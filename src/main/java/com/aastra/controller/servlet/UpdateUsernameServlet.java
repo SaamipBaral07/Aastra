@@ -19,23 +19,31 @@ public class UpdateUsernameServlet extends HttpServlet {
             UserDAO userDAO = new UserDAO();
             boolean success = userDAO.updateUsername(userId, newUsername);
 
-            if (success) {
-                // Update the user in session
-                HttpSession session = request.getSession(false);
-                if (session != null) {
-                    com.aastra.model.User user = (com.aastra.model.User) session.getAttribute("user");
-                    if (user != null) {
-                        user.setUserName(newUsername);
-                        session.setAttribute("user", user);
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                com.aastra.model.User user = (com.aastra.model.User) session.getAttribute("user");
+                if (user != null && success) {
+                    user.setUserName(newUsername);
+                    session.setAttribute("user", user);
+
+                    // Redirect based on role
+                    String role = user.getRole();
+                    if ("admin".equalsIgnoreCase(role)) {
+                        response.sendRedirect("home/admin-profile.jsp?status=updated");
+                    } else {
+                        response.sendRedirect("home/userprofile.jsp?status=updated");
                     }
+                    return;
                 }
-                response.sendRedirect("home/userprofile.jsp?status=updated");
-            } else {
-            	response.sendRedirect("home/userprofile.jsp?status=failed");
             }
+
+            // If user/session is null or update failed
+            response.sendRedirect("home/userprofile.jsp?status=failed");
+
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-            response.sendRedirect("userprofile.jsp?status=error");
+            response.sendRedirect("home/userprofile.jsp?status=error");
         }
     }
 }
+

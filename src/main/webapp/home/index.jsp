@@ -23,7 +23,7 @@
         <nav>
           <ul>
             <li><a href="#" class="active">Home</a></li>
-            <li><a href="#">Products</a></li>
+            <li><a href="product.jsp">Products</a></li>
             <li><a href="#">Contact</a></li> 
           </ul>
         </nav>
