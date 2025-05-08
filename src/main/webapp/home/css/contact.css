@@ -1,0 +1,233 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f2f2f2;
+}
+
+.contact-container {
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #2b1515;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.intro {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 30px;
+    color: #555;
+}
+
+.info-box {
+    margin-bottom: 30px;
+}
+
+.info-box h2 {
+    margin-top: 15px;
+    font-size: 20px;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+.info-card h2 i {
+    margin-right: 10px;
+}
+.info-box p {
+    font-size: 16px;
+    color: #555;
+}
+
+.brand-description h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.brand-description p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.contact-form button {
+    background-color: #800000;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.contact-form button:hover {
+    background-color: #a00000;
+}
+
+/* Font Awesome icon styling */
+.info-box i {
+    color: #800000;
+    margin-right: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .contact-container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .info-box h2,
+    .brand-description h2,
+    .contact-form h2 {
+        font-size: 18px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        font-size: 14px;
+    }
+}
+.ask-question-box {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-left: 4px solid #800000;
+    border-radius: 8px;
+}
+
+.ask-question-box h2 {
+    font-size: 20px;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.ask-question-box p {
+    color: #555;
+    margin: 10px 0;
+}
+
+.ask-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #800000;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.ask-btn:hover {
+    background-color: #a00000;
+}
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.info-card {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-left: 4px solid #800000;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.info-card h2 {
+    font-size: 20px;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.info-card p {
+    color: #555;
+    font-size: 16px;
+    margin-top: 8px;
+}
+.info-card {
+    /* Existing styles */
+    transition: transform 0.3s ease;
+}
+
+.info-card:hover {
+    transform: scale(1.02);
+}
+
+
+/* Button inside Ask a Question */
+.ask-btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 18px;
+    background-color: #800000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.ask-btn:hover {
+    background-color: #a00000;
+}
+
+/* Responsive grid for wider screens */
+@media (min-width: 700px) {
+    .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+.map-container {
+    margin-top: 30px;
+    padding: 0; /* Remove extra padding */
+    background-color: transparent; /* No background */
+    border: none; /* Remove border */
+    box-shadow: none; /* Remove shadow */
+}
+
+.map-container h2 {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.map-container h2 i {
+    margin-right: 10px;
+    color: #333;
+}
