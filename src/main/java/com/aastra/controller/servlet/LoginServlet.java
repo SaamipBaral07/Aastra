@@ -38,6 +38,7 @@ public class LoginServlet extends HttpServlet {
             if (user != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user); // Store user object in session
+                session.setAttribute("userId", user.getUserId());
                 session.setMaxInactiveInterval(60 * 60); // 1 hour session timeout
 
                 String role = user.getRole(); // Get role from user object

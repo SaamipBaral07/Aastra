@@ -7,34 +7,46 @@ import com.aastra.controller.database.DBConnect;
 import java.sql.*;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProductDAO {
-    public List<Product> getAllProductsWithImages() {
-        List<Product> productList = new ArrayList<>();
-        String query = "SELECT p.product_id, p.name, p.description, p.price, p.stock, p.category_id, pi.image_url " +
-                "FROM products p LEFT JOIN product_images pi ON p.product_id = pi.product_id";
+	public List<Product> getAllProductsWithImages() {
+	    Map<Integer, Product> productMap = new HashMap<>();
+	    String query = "SELECT p.product_id, p.name, p.description, p.price, p.stock, p.category_id, pi.image_url " +
+	                   "FROM products p " +
+	                   "LEFT JOIN product_images pi ON p.product_id = pi.product_id";
 
+	    try (Connection conn = DBConnect.getConnection();
+	         PreparedStatement ps = conn.prepareStatement(query);
+	         ResultSet rs = ps.executeQuery()) {
 
-        try (Connection conn = DBConnect.getConnection();
-             PreparedStatement ps = conn.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) {
-                Product p = new Product();
-                p.setProductId(rs.getInt("product_id"));
-                p.setName(rs.getString("name"));
-                p.setDescription(rs.getString("description"));
-                p.setPrice(rs.getDouble("price"));
-                p.setStock(rs.getInt("stock"));
-                p.setCategoryId(rs.getInt("category_id"));
-                p.setImageUrl(rs.getString("image_url"));
-                productList.add(p);
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return productList;
-    }
+	        while (rs.next()) {
+	            int productId = rs.getInt("product_id");
+
+	            // If product not already in the map, add it
+	            if (!productMap.containsKey(productId)) {
+	                Product p = new Product();
+	                p.setProductId(productId);
+	                p.setName(rs.getString("name"));
+	                p.setDescription(rs.getString("description"));
+	                p.setPrice(rs.getDouble("price"));
+	                p.setStock(rs.getInt("stock"));
+	                p.setCategoryId(rs.getInt("category_id"));
+	                p.setImageUrl(rs.getString("image_url")); // First image (if exists)
+	                productMap.put(productId, p);
+	            }
+	            // else: skip other images for same product_id
+	        }
+
+	    } catch (SQLException | ClassNotFoundException e) {
+	        e.printStackTrace();
+	    }
+
+	    return new ArrayList<>(productMap.values());
+	}
+
     public Product getProductById(int productId) {
         String query = "SELECT p.product_id, p.name, p.description, p.price, p.stock, p.category_id, pi.image_url " +
                        "FROM products p LEFT JOIN product_images pi ON p.product_id = pi.product_id " +
@@ -177,6 +189,65 @@ public class ProductDAO {
             return false;
         }
     }
+    public List<Product> getProductsByCategoryName(String categoryName) throws ClassNotFoundException {
+        Map<Integer, Product> productMap = new HashMap<>();
+        String sql = "SELECT p.product_id, p.name, p.description, p.price, p.stock, p.category_id, pi.image_url " +
+                     "FROM products p " +
+                     "JOIN categories c ON p.category_id = c.category_id " +
+                     "LEFT JOIN product_images pi ON p.product_id = pi.product_id " +
+                     "WHERE LOWER(c.name) = ?";
+
+        try (Connection conn = DBConnect.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, categoryName.toLowerCase());
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int productId = rs.getInt("product_id");
+
+                // If this product hasn't been added yet, add it
+                if (!productMap.containsKey(productId)) {
+                    Product product = new Product();
+                    product.setProductId(productId);
+                    product.setName(rs.getString("name"));
+                    product.setDescription(rs.getString("description"));
+                    product.setPrice(rs.getDouble("price"));
+                    product.setStock(rs.getInt("stock"));
+                    product.setCategoryId(rs.getInt("category_id"));
+                    product.setImageUrl(
+                        rs.getString("image_url") != null ? rs.getString("image_url") : "images/default.jpg"
+                    );
+                    productMap.put(productId, product);
+                }
+                
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return new ArrayList<>(productMap.values());
+    }
+    public List<String> getAllImageUrlsByProductId(int productId) {
+        List<String> imageUrls = new ArrayList<>();
+        String sql = "SELECT image_url FROM product_images WHERE product_id = ?";
+
+        try (Connection conn = DBConnect.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, productId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                imageUrls.add(rs.getString("image_url"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return imageUrls;
+    }
+
+
 
     }
 

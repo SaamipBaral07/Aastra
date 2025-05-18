@@ -1,7 +1,7 @@
 @charset "UTF-8";
 html {
   font-size: 62.5%;
-   display: flex;
+  display: flex;
   flex-direction: column;
   margin: 0;
   padding: 0;
@@ -338,6 +338,75 @@ nav ul li a:hover:before {
 .top-pick-info .stock {
   font-size: 1.4rem;
   color: #666;
+}
+/*Search bar and logo*/
+.search-bar-container {
+  display: none; /* hide by default */
+  position: absolute;
+  top: 80px; /* adjust based on your header height */
+  right: 20px;
+  background-color: white;
+  padding: 10px 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  z-index: 1000;
+}
+.search-bar-container input[type="text"] {
+  padding: 10px;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+.search-bar-container.show {
+  display: block;
+  opacity: 1;
+}
+/* Ensure main content layout stays side-by-side */
+.main-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 2em;
+}
+.icon-button img {
+  width: 40px; 
+  height: 40px;
+  transition: transform 0.2s ease-in-out;
+}
+/* Product Page Category Filter*/
+.category-filter-container {
+    text-align: center;
+    margin: 30px 0 20px;
+}
+
+.category-filter-form {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.category-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+.category-select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f9f9f9;
+    transition: border 0.3s ease;
+}
+
+.category-select:focus {
+    border-color: #27ae60;
+    outline: none;
 }
 
 /* Intro Animation */

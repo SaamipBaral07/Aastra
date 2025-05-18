@@ -4,11 +4,52 @@
     <meta charset="UTF-8">
     <title>Contact Us | Vastra</title>
     <link rel="stylesheet" type="text/css" href="css/contact.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@200;400;700&display=swap"
+      rel="stylesheet"
+    />
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
+<div class="overlay"></div>
+    <div class="wrapper">
+      <header>
+        <a href="#"><img src="images/small_llogo-1.png" alt="VaasTra Logo" /></a>
+
+        <nav>
+          <ul>
+            <li><a href="index.jsp">Home</a></li>
+            <li><a href="product.jsp" >Products</a></li>
+            <li><a href="#" class=active>Contact</a></li> 
+            <li><a href="about.jsp">About Us</a></li>
+            <li><a href="#"></a></li>
+          </ul>
+        </nav>
+
+	<div class="navbar-icons">
+  		<button class="icon-button" title="Search" onclick="toggleSearchBar()">
+    		<img src="images/search-icon.jpg" alt="Search" />
+  		</button>
+  		<button class="icon-button" title="Cart" onclick="goToCart()">
+   			 <img src="images/cart-icon.png" alt="Cart" />
+  		</button>
+  		<button class="icon-button" title="User Profile" onclick="goToUserProfile()">
+   		 <img src="images/user-icon1.png" alt="User" />
+  		</button>
+	</div>
+
+        <div class="search-bar-container" id="searchBar">
+          <input type="text" placeholder="Search..." />
+        </div>
+      </header>
+
 
 <div class="contact-container">
     <h1>Contact Us</h1>
@@ -49,6 +90,7 @@
         <p>
             Vastra is your go-to destination for contemporary and traditional fashion. We offer a wide variety of clothing for Men, Women, and Kids crafted with style, comfort, and culture in mind. At Vastra, fashion meets authenticity.
         </p>
+        </div>
      <!-- Google Map -->
 <div class="map-container">
 	<h2><i class="fa-solid fa-map-location-dot"></i> Find Us on the Map</h2>
@@ -62,6 +104,7 @@
     </iframe>
 </div>
  
+</div>
 </div>
 
 </body>

@@ -24,13 +24,14 @@
           <ul>
             <li><a href="#" class="active">Home</a></li>
             <li><a href="product.jsp">Products</a></li>
-            <li><a href="#">Contact</a></li> 
+            <li><a href="contact.jsp">Contact</a></li> 
+            <li><a href="about.jsp">About Us</a></li>
           </ul>
         </nav>
 
 	<div class="navbar-icons">
   		<button class="icon-button" title="Search" onclick="toggleSearchBar()">
-    		<img src="images/search-icon.jpg" alt="Search" />
+    		<img src="images/search-icon1.png" alt="Search" />
   		</button>
   		<button class="icon-button" title="Cart" onclick="goToCart()">
    			 <img src="images/cart-icon.png" alt="Cart" />
