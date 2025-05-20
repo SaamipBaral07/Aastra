@@ -13,7 +13,7 @@
 
     <!-- Your custom CSS -->
     <link rel="stylesheet" href="css/login.css">
-    
+
 </head>
 <body>
     <div class="container">
@@ -30,9 +30,9 @@
 
                 <!-- Error Message Display --> 
                 <% 
-    String errorMessage = (String) session.getAttribute("errorMessage");
-    if (errorMessage != null) {
-%>
+    		String errorMessage = (String) session.getAttribute("errorMessage");
+   			 if (errorMessage != null) {
+				%>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <%= errorMessage %>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
