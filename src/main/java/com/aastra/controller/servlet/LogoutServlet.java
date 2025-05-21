@@ -12,6 +12,12 @@ import java.io.IOException;
 @WebServlet("/LogoutServlet")
 public class LogoutServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doPost(request, response); // Delegate to doPost for logic reuse
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

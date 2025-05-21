@@ -2,6 +2,8 @@ package com.aastra.controller.servlet;
 
 import com.aastra.controller.dao.UserDAO;
 import com.aastra.model.User;
+import com.aastra.util.EncryptDecrypt;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -23,7 +25,8 @@ public class RegisterServlet extends HttpServlet {
 		User user = new User();
 		user.setUserName(username);
 		user.setEmail(email);
-		user.setPassword(password); // Note: In production, hash the password!
+		user.setPassword(EncryptDecrypt.encrypt(password)); // Encrypt before saving
+ // Note: In production, hash the password!
 		user.setRole(role);
 
 		try {
@@ -41,7 +44,7 @@ public class RegisterServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("errorMessage", "An error occurred. Please try again.");
-			request.getRequestDispatcher("/home/register.jsp").forward(request, response);
+			request.getRequestDispatcher("home/register.jsp").forward(request, response);
 		}
 	}
 }

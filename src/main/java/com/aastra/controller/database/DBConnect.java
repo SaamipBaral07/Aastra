@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBConnect{
-	private final static String databaseName = "vaastra";
+	private final static String databaseName = "vaastra-1";
 	private final static String username = "root";
 	private final static String password = "";
 	private final static String jdbcURL = "jdbc:mysql://localhost:3306/" + databaseName;

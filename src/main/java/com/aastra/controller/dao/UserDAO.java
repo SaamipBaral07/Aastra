@@ -5,8 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 import com.aastra.controller.database.DBConnect;
 import com.aastra.model.User;
+import com.aastra.util.EncryptDecrypt;
+
 
 public class UserDAO {
 	private Connection conn;
@@ -80,32 +83,48 @@ public class UserDAO {
 	}
 	// Authenticates user by checking email and password
 	public User login(String emailToCheck, String passwordToCheck) {
-		User user = null;
-		String query = "SELECT * FROM users WHERE email = ? AND password = ?";
-		if (conn != null) {
-			try {
-				ps = conn.prepareStatement(query);
-				ps.setString(1, emailToCheck);
-				ps.setString(2, passwordToCheck); // TODO In production, always hash and compare passwords
-				ResultSet userSet = ps.executeQuery();
-				
-				// If user is found, put values to User object
-				if (userSet.next()) {
-					user = new User(
-							userSet.getInt("user_id"), 
-							userSet.getString("username"), 
-							userSet.getString("email"),
-							userSet.getString("password"), 
-							userSet.getString("role"), 
-							userSet.getTimestamp("created_at"));
-				}
-			} catch (SQLException e) {
-				// TODO Logs error if login fails
-				e.printStackTrace();
-			}
-		}
-		return user;// Returns null if no match found and returns the user info if user the user was found in database
+	    User user = null;
+	    try (Connection conn = DBConnect.getConnection()) {
+	        // 1. Try encrypted login
+	        String encryptedPassword = EncryptDecrypt.encrypt(passwordToCheck);
+	        PreparedStatement ps = conn.prepareStatement("SELECT * FROM users WHERE email = ? AND password = ?");
+	        ps.setString(1, emailToCheck);
+	        ps.setString(2, encryptedPassword);
+	        ResultSet rs = ps.executeQuery();
+
+	        if (!rs.next()) {
+	            // 2. Fallback to plaintext (legacy password)
+	            ps = conn.prepareStatement("SELECT * FROM users WHERE email = ? AND password = ?");
+	            ps.setString(1, emailToCheck);
+	            ps.setString(2, passwordToCheck);
+	            rs = ps.executeQuery();
+
+	            if (rs.next()) {
+	                // Login successful with plaintext -> upgrade password
+	                String encrypted = EncryptDecrypt.encrypt(passwordToCheck);
+	                PreparedStatement updatePs = conn.prepareStatement("UPDATE users SET password = ? WHERE email = ?");
+	                updatePs.setString(1, encrypted);
+	                updatePs.setString(2, emailToCheck);
+	                updatePs.executeUpdate();
+	            } else {
+	                return null; // Login failed
+	            }
+	        }
+
+	        // Build the user object (whether logged in via encrypted or plaintext)
+	        user = new User();
+	        user.setUserId(rs.getInt("user_id"));
+	        user.setUserName(rs.getString("username"));
+	        user.setEmail(rs.getString("email"));
+	        user.setRole(rs.getString("role"));
+	        user.setCreatedAt(rs.getTimestamp("created_at"));
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return user;
 	}
+
 	// Updates the username of a user by userId
 	public boolean updateUsername(int userId, String newUsername) {
 	    boolean isUpdated = false;

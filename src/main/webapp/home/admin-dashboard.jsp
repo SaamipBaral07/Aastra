@@ -40,15 +40,15 @@
               </li>
 
                 <li>
-   <a href="${pageContext.request.contextPath}/AdminProductServlet">
-        <span class="icon">
+   			<a href="${pageContext.request.contextPath}/AdminProductServlet">
+       		 <span class="icon">
             <ion-icon name="cube-outline"></ion-icon>
-        </span>
-        <span class="title">Products</span>
-    </a>
-</li>
-<li>
-                    <a href="orders.jsp">
+       		 </span>
+       		 <span class="title">Products</span>
+    	</a>
+			</li>
+			<li>
+                    <a href="${pageContext.request.contextPath}/AdminOrderServlet">
                         <span class="icon">
                             <ion-icon name="cart-outline"></ion-icon>
                         </span>
@@ -57,7 +57,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                     <a href="${pageContext.request.contextPath}/LogoutServlet">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>

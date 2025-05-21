@@ -4,105 +4,165 @@
 <%@ page import="com.aastra.controller.dao.CartDAO" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+
 <%
-    Integer userId = (Integer) session.getAttribute("userId");
-    if (userId == null) {
-        response.sendRedirect("login.jsp");
-        return;
-    }
-    CartDAO cartDAO = new CartDAO();
-    List<CartItem> cartItems = cartDAO.getCartItemsByUserId(userId);
-    request.setAttribute("cartItems", cartItems);
+Integer userId = (Integer) session.getAttribute("userId");
+if (userId == null) {
+    response.sendRedirect("login.jsp");
+    return;
+}
+CartDAO cartDAO = new CartDAO();
+List<CartItem> cartItems = cartDAO.getCartItemsByUserId(userId);
+request.setAttribute("cartItems", cartItems);
 %>
 
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="css/cart.css">
+   <link rel="stylesheet" type="text/css" href="css/main.css">
     <title>Your Cart</title>
-    <style>
-        img.product-img {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            display: block;
-            margin-bottom: 5px;
-        }
-        .quantity-buttons button {
-            width: 30px;
-            height: 30px;
-        }
-        table {
-            border-collapse: collapse;
-            width: 80%;
-        }
-        table, th, td {
-            border: 1px solid gray;
-        }
-        th, td {
-            padding: 10px;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
 </head>
 <body>
 
-<h2>Your Shopping Cart</h2>
-<c:if test="${not empty sessionScope.error}">
-    <p style="color: red;">${sessionScope.error}</p>
-    <c:remove var="error" scope="session"/>
-</c:if>
+    <div class="wrapper">
+      <header>
+        <a href="#"><img src="${pageContext.request.contextPath}/home/images/small_llogo-1.png" alt="VaasTra Logo" /></a>
 
+        <nav>
+          <ul>
+            <li><a href="${pageContext.request.contextPath}/home/index.jsp">Home</a></li>
+            <li><a href="${pageContext.request.contextPath}/ProductServlet" class=active>Products</a></li>
+            <li><a href="${pageContext.request.contextPath}/home/contact.jsp">Contact</a></li> 
+            <li><a href="${pageContext.request.contextPath}/home/about.jsp">About Us</a></li>
+            <li><a href="#"></a></li>
+          </ul>
+        </nav>
 
-<c:choose>
-    <c:when test="${not empty cartItems}">
-        <table>
-            <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-                <th>Action</th>
-            </tr>
-            <c:set var="cartTotal" value="0" />
-            <c:forEach var="item" items="${cartItems}">
-                <c:set var="itemTotal" value="${item.product.price * item.quantity}" />
-                <c:set var="cartTotal" value="${cartTotal + itemTotal}" />
-                <tr>
-                    <td>
-                        <img src="${pageContext.request.contextPath}/${item.product.imageUrl}" alt="Product Image" class="product-img"/>
-                        ${item.product.name}
-                    </td>
-                    <td>${item.product.price}</td>
-                    <td>
-                        <form action="${pageContext.request.contextPath}/UpdateCartServlet" method="post" class="quantity-buttons">
-                            <input type="hidden" name="productId" value="${item.product.productId}" />
-                            <button type="submit" name="action" value="decrease">-</button>
-                            ${item.quantity}
-                            <button type="submit" name="action" value="increase">+</button>
+	<div class="navbar-icons">
+  		<button class="icon-button" title="Search" onclick="toggleSearchBar()">
+    		<img src="${pageContext.request.contextPath}/home/images/search-icon.jpg" alt="Search" />
+  		</button>
+  		<button class="icon-button" title="Cart" onclick="goToCart()">
+   			 <img src="${pageContext.request.contextPath}/home/images/cart-icon.png" alt="Cart" />
+  		</button>
+  		<button class="icon-button" title="User Profile" onclick="goToUserProfile()">
+   		 <img src="${pageContext.request.contextPath}/home/images/user-icon1.png" alt="User" />
+  		</button>
+	</div>
+
+        <div class="search-bar-container" id="searchBar">
+          <input type="text" placeholder="Search..." />
+        </div>
+      </header>
+    <div class="container">
+        <div class="header">
+            <h1 class="cart-title">Shopping Cart</h1>
+            <c:choose>
+                <c:when test="${not empty cartItems}">
+                    <p class="items-count">${cartItems.size()} Items</p>
+                </c:when>
+                <c:otherwise>
+                    <p class="items-count">0 Items</p>
+                </c:otherwise>
+            </c:choose>
+        </div>
+        
+        <c:if test="${not empty sessionScope.error}">
+            <div class="error-message">
+                ${sessionScope.error}
+                <c:remove var="error" scope="session"/>
+            </div>
+        </c:if>
+        
+        <c:choose>
+            <c:when test="${not empty cartItems}">
+                <div class="cart-grid">
+                    <div class="cart-items">
+                        <!-- Column Headers -->
+                        <div class="item column-headers">
+                            <div class="header-product">Product</div>
+                            <div class="header-price">Price</div>
+                            <div class="header-quantity">Quantity</div>
+                            <div class="header-total">Total</div>
+                            <div class="header-action">Action</div>
+                        </div>
+                        
+                        <c:set var="cartTotal" value="0" />
+                        <c:forEach var="item" items="${cartItems}">
+                            <c:set var="itemTotal" value="${item.product.price * item.quantity}" />
+                            <c:set var="cartTotal" value="${cartTotal + itemTotal}" />
+                            
+                            <div class="item">
+                                <div class="item-product">
+                                    <div class="item-image">
+                                        <img src="${pageContext.request.contextPath}/${item.product.imageUrl}" alt="${item.product.name}">
+                                    </div>
+                                    <div class="item-details">
+                                        <h4>${item.product.name}</h4>
+                                    </div>
+                                </div>
+                                
+                                <div class="item-price">
+                                    ${item.product.price}
+                                </div>
+                                
+                                <div class="item-quantity">
+                                    <form action="${pageContext.request.contextPath}/UpdateCartServlet" method="post">
+                                        <input type="hidden" name="productId" value="${item.product.productId}" />
+                                        <div class="quantity-control">
+                                            <button type="submit" name="action" value="decrease" class="quantity-btn">-</button>
+                                            <input type="text" value="${item.quantity}" class="quantity-value" readonly>
+                                            <button type="submit" name="action" value="increase" class="quantity-btn">+</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <div class="item-total">
+                                    ${itemTotal}
+                                </div>
+                                
+                                <div class="item-action">
+                                    <form action="${pageContext.request.contextPath}/RemoveFromCartServlet" method="post">
+                                        <input type="hidden" name="productId" value="${item.product.productId}" />
+                                        <button type="submit" class="item-remove">Remove</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </c:forEach>
+                        
+                        <a href="${pageContext.request.contextPath}/ProductServlet" class="continue-shopping">← Continue Shopping</a>
+                    </div>
+                    
+                    <div class="cart-summary">
+                        <h3 class="summary-title">Order Summary</h3>
+                        
+                        <div class="summary-row">
+                            <span class="summary-label">Items (${cartItems.size()})</span>
+                            <span class="summary-value">${cartTotal}</span>
+                        </div>
+                        
+                        <div class="total-row">
+                            <span class="total-label">Total Cost</span>
+                            <span class="total-value">$${cartTotal}</span>
+                        </div>
+                        
+                        <form action="${pageContext.request.contextPath}/CheckoutServlet" method="post">
+                            <button type="submit" class="checkout-btn">CHECKOUT</button>
                         </form>
-                    </td>
-                    <td>${itemTotal}</td>
-                    <td>
-                        <form action="${pageContext.request.contextPath}/RemoveFromCartServlet" method="post">
-                            <input type="hidden" name="productId" value="${item.product.productId}" />
-                            <button type="submit">Remove</button>
-                        </form>
-                    </td>
-                </tr>
-            </c:forEach>
-            <tr>
-                <td colspan="3" align="right"><strong>Cart Total:</strong></td>
-                <td colspan="2"><strong>${cartTotal}</strong></td>
-            </tr>
-        </table>
-
-        <form action="${pageContext.request.contextPath}/CheckoutServlet" method="post">
-            <button type="submit">Proceed to Checkout</button>
-        </form>
-    </c:when>
-    <c:otherwise>
-        <p>Your cart is empty.</p>
-    </c:otherwise>
-</c:choose>
-
+                    </div>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div class="empty-cart">
+                    <p>Your cart is empty.</p>
+                    <a href="${pageContext.request.contextPath}/ProductServlet" class="continue-shopping">← Continue Shopping</a>
+                </div>
+            </c:otherwise>
+        </c:choose>
+    </div>
+    </div>
 </body>
 </html>

@@ -10,9 +10,8 @@
 
     <!-- Bootstrap CSS (keep it for buttons, alert, etc.) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Your custom CSS -->
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/home/css/login.css">
 
 </head>
 <body>
@@ -22,7 +21,7 @@
         <div class="left-panel">
             <!-- Logo on the left side -->
             <div class="logo-container">
-                <img src="images/logoo.png" alt="Brand Logo" class="brand-logo">
+                <img src="${pageContext.request.contextPath}/home/images/logoo.png" alt="Brand Logo" class="brand-logo">
             </div>
 
             <div class="card p-4 shadow" style="max-width: 400px; width: 100%; margin: auto;">

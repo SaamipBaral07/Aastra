@@ -53,8 +53,8 @@
                         <span class="title">Products</span>
                     </a>
                 </li>
-                <li>
-                    <a href="orders.jsp">
+               <li>
+                    <a href="${pageContext.request.contextPath}/AdminOrderServlet">
                         <span class="icon">
                             <ion-icon name="cart-outline"></ion-icon>
                         </span>
@@ -62,7 +62,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="logout">
+                     <a href="${pageContext.request.contextPath}/LogoutServlet">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>

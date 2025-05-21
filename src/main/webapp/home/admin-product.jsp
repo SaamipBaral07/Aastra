@@ -51,7 +51,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="${pageContext.request.contextPath}/AdminOrderServlet">
+                        <span class="icon">
+                            <ion-icon name="cart-outline"></ion-icon>
+                        </span>
+                        <span class="title">Orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/LogoutServlet">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -74,8 +82,11 @@
                     </label>
                 </div>
 
-                <div class="user">
-                    <ion-icon name="person-circle-outline"></ion-icon>
+                 <div class="user">
+                <a href="${pageContext.request.contextPath}/home/admin-profile.jsp" title="Admin Profile Page">
+                     <ion-icon name="person-circle-outline" style="font-size: 24px; color: #444;"></ion-icon>
+                </a>
+
                 </div>
             </div>
 
@@ -94,7 +105,7 @@
                             <tr>
                                 <td>Image</td>
                                 <td>Product Name</td>
-                                <td>Description</td>
+                              
                                 <td>Price</td>
                                 <td>Stock</td>
                                 <td>Category</td>
@@ -109,7 +120,7 @@
                                              alt="Product Image"/>
                                     </td>
                                     <td>${product.name}</td>
-                                    <td>${product.description}</td>
+                                 
                                     <td>$${product.price}</td>
                                     <td>${product.stock}</td>
                                     <td>${product.categoryId}</td>
