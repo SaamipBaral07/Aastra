@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="css/admin-dashboard.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/home/css/admin-dashboard.css">
 </head>
 
 <body>
@@ -91,7 +92,7 @@
             <div class="cardBox">
                 <div class="card">
                     <div>
-                        <div class="numbers">2,340</div>
+                        <div class="numbers">${totalUsers}</div>
                         <div class="cardName">Total Users</div>
                     </div>
                     <div class="iconBx">
@@ -101,7 +102,7 @@
 
                 <div class="card">
                     <div>
-                        <div class="numbers">120</div>
+                        <div class="numbers">${totalOrders}</div>
                         <div class="cardName">Orders</div>
                     </div>
                     <div class="iconBx">
@@ -111,17 +112,17 @@
 
                 <div class="card">
                     <div>
-                        <div class="numbers">340</div>
-                        <div class="cardName">Reviews</div>
+                        <div class="numbers">${totalProducts}</div>
+                        <div class="cardName">Products</div>
                     </div>
                     <div class="iconBx">
-                        <ion-icon name="star-outline"></ion-icon>
+                        <ion-icon name="cube-outline"></ion-icon>
                     </div>
                 </div>
 
                 <div class="card">
                     <div>
-                        <div class="numbers">$10,450</div>
+                        <div class="numbers">$${totalEarnings}</div>
                         <div class="cardName">Earning</div>
                     </div>
                     <div class="iconBx">
@@ -131,55 +132,57 @@
             </div>
 
             <div class="details">
-                <div class="recentOrders">
-                    <div class="cardHeader">
-                        <h2>Recent Orders</h2>
-                        <a href="#" class="btn">View All</a>
-                    </div>
+    <!-- Recent Orders -->
+    <div class="recentOrders">
+        <div class="cardHeader">
+            <h2>Recent Orders</h2>
+            <a href="#" class="btn">View All</a>
+        </div>
 
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>User ID</td>
-                                <td>Product Name</td>
-                                <td>Quantity</td>
-                                <td>Amount</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>#U101</td><td>Denim Jacket</td><td>2</td><td>$120</td></tr>
-                            <tr><td>#U102</td><td>Summer Dress</td><td>1</td><td>$75</td></tr>
-                            <tr><td>#U103</td><td>Leather Boots</td><td>1</td><td>$180</td></tr>
-                            <tr><td>#U104</td><td>Graphic T-Shirt</td><td>3</td><td>$90</td></tr>
-                        </tbody>
-                    </table>
-                </div>
+        <table>
+            <thead>
+                <tr>
+                    <td>User ID</td>
+                    <td>Product Name</td>
+                    <td>Quantity</td>
+                    <td>Amount</td>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="order" items="${recentOrders}">
+                    <tr>
+                        <td>#U${order[0]}</td>
+                        <td>${order[1]}</td>
+                        <td>${order[2]}</td>
+                        <td>$${order[3]}</td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
 
-                <div class="recentCustomers">
-                    <div class="cardHeader">
-                        <h2>Recent Customers</h2>
-                    </div>
+    <!-- Recent Customers -->
+    <div class="recentCustomers">
+        <div class="cardHeader">
+            <h2>Recent Customers</h2>
+        </div>
 
-                    <table>
-                        <tr>
-                            <td width="60px"><div class="imgBx"><img src="images/person-1.jpg" alt=""></div></td>
-                            <td><h4> Hania <br> <span>Pakistan</span></h4></td>
-                        </tr>
-                        <tr>
-                            <td width="60px"><div class="imgBx"><img src="images/person-2.jpg" alt=""></div></td>
-                            <td><h4>Ravi <br> <span>India</span></h4></td>
-                        </tr>
-                        <tr>
-                            <td width="60px"><div class="imgBx"><img src="images/person-3.png" alt=""></div></td>
-                            <td><h4>Sophia <br> <span>UK</span></h4></td>
-                        </tr>
-                        <tr>
-                            <td width="60px"><div class="imgBx"><img src="images/person-4.jpg" alt=""></div></td>
-                            <td><h4>John <br> <span>Canada</span></h4></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+        <table>
+            <c:forEach var="user" items="${recentCustomers}">
+                <tr>
+                    <td width="60px">
+                        <div class="imgBx">
+                            <ion-icon name="person-circle-outline" style="font-size: 40px;"></ion-icon>
+                        </div>
+                    </td>
+                    <td>
+                        <h4>${user.userName} <br> <span>${user.email}</span></h4>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+</div>
         </div>
     </div>
 

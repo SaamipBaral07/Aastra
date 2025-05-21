@@ -170,6 +170,27 @@ public class UserDAO {
 
 	    return customers;
 	}
+	public ArrayList<User> getRecentCustomers(int limit) {
+	    ArrayList<User> customers = new ArrayList<>();
+	    String query = "SELECT * FROM users WHERE role = 'CUSTOMER' ORDER BY created_at DESC LIMIT ?";
+
+	    try (PreparedStatement ps = conn.prepareStatement(query)) {
+	        ps.setInt(1, limit);
+	        ResultSet rs = ps.executeQuery();
+	        while (rs.next()) {
+	            User user = new User();
+	            user.setUserId(rs.getInt("user_id"));
+	            user.setUserName(rs.getString("username"));
+	            user.setEmail(rs.getString("email"));
+	            user.setRole(rs.getString("role"));
+	            user.setCreatedAt(rs.getTimestamp("created_at"));
+	            customers.add(user);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return customers;
+	}
 
 
 }
