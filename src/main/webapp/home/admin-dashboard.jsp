@@ -136,7 +136,7 @@
     <div class="recentOrders">
         <div class="cardHeader">
             <h2>Recent Orders</h2>
-            <a href="#" class="btn">View All</a>
+            <a href="${pageContext.request.contextPath}/AdminOrderServlet" class="btn">View All</a>
         </div>
 
         <table>
@@ -186,7 +186,7 @@
         </div>
     </div>
 
-    <script src="admin-dashboard.js"></script>
+    <script src="${pageContext.request.contextPath}/home/admin-dashboard.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>

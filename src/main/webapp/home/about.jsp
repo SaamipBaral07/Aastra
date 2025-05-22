@@ -108,7 +108,7 @@
                 </div>
 
                 <div class="team-card">
-                    <img src="images/sandeep.jpg" alt="Sandeep Poudel">
+                    <img src="images/unnamed.jpg" alt="Sandeep Poudel">
                     <h3>Sandeep Poudel</h3>
                     <p>Customer Experience Head</p>
                 </div>

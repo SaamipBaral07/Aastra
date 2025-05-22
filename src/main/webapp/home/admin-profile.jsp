@@ -83,7 +83,7 @@
 		</div>
                                 
                     <div class="buttons">
-                        <a href="admin-dashboard.jsp" class="btn btn-primary">
+                        <a href="${pageContext.request.contextPath}/AdminDashboardServlet" class="btn btn-primary">
                             <i class="fas fa-tachometer-alt"></i>Dashboard
                         </a>
                         <form action="${pageContext.request.contextPath}/LogoutServlet" method="post" class="logout-form">

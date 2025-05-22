@@ -67,7 +67,7 @@
         <div class="left-col">
           <h1>Dress Bold. Stay Real. Be You.</h1>
           <p class="subhead">
-            Wear your vibe, not just a brand — VaasTra makes every outfit count
+            Wear your vibe, not just a brand VaasTra makes every outfit count
           </p>
 
           <div class="cta-btns">
@@ -76,10 +76,10 @@
           </div>
 
           <div class="news">
-            <p class="employees">50K</p>
+            <p class="employees">20K</p>
             <p class="details">
-              We’re proud to announce that we now employ a workforce of over
-              <strong>50,000</strong>. It’s all possible because of you.
+              We are proud to announce that we now have a customer count of over
+              <strong>20,000</strong>. It is all possible because of you.
             </p>
           </div>
         </div>
