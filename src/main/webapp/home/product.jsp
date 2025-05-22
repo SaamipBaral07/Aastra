@@ -13,62 +13,9 @@
           rel="stylesheet" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/home/css/main.css">
     
-    <title>Available Products</title>
-    <style>
-        .product-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-        .product-card {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            width: 250px;
-            padding: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        .product-card img {
-            max-width: 100%;
-            height: 200px;
-            object-fit: contain;
-            border-radius: 5px;
-        }
-        .product-name {
-            font-size: 18px;
-            font-weight: bold;
-            color: #2c3e50;
-            margin: 10px 0 5px;
-        }
-        .product-price {
-            color: #27ae60;
-            font-weight: bold;
-        }
-        .product-desc {
-            font-size: 14px;
-            color: #555;
-            margin: 10px 0;
-        }
-        .product-stock {
-            font-size: 13px;
-            color: #888;
-        }
-        .search-bar-container {
-  			display: none; /* hide by default */
-  			position: absolute;
-  			top: 160px; /* adjust based on your header height */
-  			right: 100px;
-  			background-color: white;
-  			padding: 10px 20px;
- 			 box-shadow: 0 4px 8px rgba(0,0,0,0.1);
- 			 border-radius: 8px;
- 			 transition: opacity 0.3s ease;
- 			 opacity: 0;
-  			z-index: 1000;
-			}
-    </style>
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/home/css/product.css">
+    
+    <title>Products</title>
 </head>
 <body>
     <div class="overlay"></div>
@@ -119,7 +66,7 @@
             </form>
         </div>
 
-        <h1>Available Products</h1>
+        <h1>Authentic Vaastra Products</h1>
         <div class="product-container">
             <%
                 List<Product> productList = (List<Product>) request.getAttribute("productList");
@@ -147,6 +94,7 @@
             %>
         </div>
     </div>
+     <jsp:include page="footer.jsp" />
 
     <script>
         function toggleSearchBar() {

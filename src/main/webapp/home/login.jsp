@@ -44,11 +44,11 @@
                 <form action="${pageContext.request.contextPath}/LoginServlet" method="post">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="user@example.com" name="login_garda_deko_email">
+                        <input type="email" class="form-control" id="email" placeholder="user@example.com" name="login_email">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="login_garda_deko_password">
+                        <input type="password" class="form-control" id="password" name="login_password">
                     </div>
                     <button type="submit" class="btn btn-primary w-100 btn-hover">Log In</button>
                     <p class="mt-2 text-center">Don't have an account? 

@@ -30,7 +30,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/home/admin-dashboard.jsp">
+                    <a href="${pageContext.request.contextPath}/AdminDashboardServlet">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>

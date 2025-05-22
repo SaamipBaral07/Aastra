@@ -1,4 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.aastra.controller.dao.ProductDAO" %>
+<%@ page import="com.aastra.model.Product" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
+<%
+    try {
+        ProductDAO dao = new ProductDAO();
+        List<Product> topPicks = dao.getTopSellingProducts(3);
+        request.setAttribute("topPicks", topPicks);
+    } catch (Exception e) {
+        e.printStackTrace();
+        out.println("<p>Error: " + e.getMessage() + "</p>");
+    }
+%>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -54,8 +71,8 @@
           </p>
 
           <div class="cta-btns">
-            <a href="#" class="primary-cta">Browse our collection</a>
-            <a href="#" class="secondary-cta"><span>Latest Added Collection</span></a>
+            <a href="${pageContext.request.contextPath}/ProductServlet" class="primary-cta">Browse our collection</a>
+            <a href="${pageContext.request.contextPath}/ProductServlet" class="secondary-cta"><span>Latest Added Collection</span></a>
           </div>
 
           <div class="news">
@@ -97,40 +114,32 @@
           </div>
         </div>
         </main>
-		<!-- Top Picks Section (Full Width Below Main Content) -->
-<section class="top-picks-section">
+
+<<section class="top-picks-section">
   <h2>Top Picks</h2>
-  <div class="top-picks-container">
-    
-    <div class="top-pick-card">
-      <img src="images/top1.webp" alt="Top Pick 1">
-      <div class="top-pick-info">
-        <p class="product-name"> Vanarasi Lehenga</p>
-        <p class="price">$45.00</p>
-        <p class="stock">In Stock: 12</p>
-      </div>
-    </div>
+  <c:choose>
+    <c:when test="${not empty topPicks}">
+      <div class="top-picks-container">
+        <c:forEach var="product" items="${topPicks}">
+          <div class="top-pick-card">
+<img src="${pageContext.request.contextPath}/${product.imageUrl}" alt="${product.name}" />
 
-    <div class="top-pick-card">
-      <img src="images/top2.jpg" alt="Top Pick 2">
-      <div class="top-pick-info">
-        <p class="product-name">Pure Leather Jacket</p>
-        <p class="price">$75.99</p>
-        <p class="stock">In Stock: 7</p>
+            <div class="top-pick-info">
+              <p class="product-name">${product.name}</p>
+              <p class="price">$${product.price}</p>
+              <p class="stock">In Stock: ${product.stock}</p>
+            </div>
+          </div>
+        </c:forEach>
       </div>
-    </div>
-
-    <div class="top-pick-card">
-      <img src="images/top3.webp" alt="Top Pick 3">
-      <div class="top-pick-info">
-        <p class="product-name">Comfy Woman Tees</p>
-        <p class="price">$38.50</p>
-        <p class="stock">In Stock: 20</p>
-      </div>
-    </div>
-
-  </div>
+    </c:when>
+    <c:otherwise>
+      <p style="color:red;text-align:center;">No top picks available</p>
+    </c:otherwise>
+  </c:choose>
 </section>
+
+
 
 	</div>	
     <jsp:include page="footer.jsp" />

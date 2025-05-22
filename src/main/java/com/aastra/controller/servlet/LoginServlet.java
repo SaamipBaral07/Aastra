@@ -28,8 +28,8 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String emailToCheck = request.getParameter("login_garda_deko_email");
-        String passwordToCheck = request.getParameter("login_garda_deko_password");
+        String emailToCheck = request.getParameter("login_email");
+        String passwordToCheck = request.getParameter("login_password");
 
         try {
             UserDAO userdao = new UserDAO();

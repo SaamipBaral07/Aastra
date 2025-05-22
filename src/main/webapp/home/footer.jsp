@@ -28,9 +28,9 @@
     <div class="footer-right">
       <h3>Follow Us</h3>
       <div class="social-icons">
-        <a href="#"><img src="images/facebook.jpg" alt="Facebook" /></a>
-        <a href="#"><img src="images/insta.jpg" alt="Instagram" /></a>
-        <a href="#"><img src="images/twitter.jpg" alt="Twitter" /></a>
+        <a href="#"><img src="${pageContext.request.contextPath}/home/images/facebook.jpg" alt="Facebook" /></a>
+        <a href="#"><img src="${pageContext.request.contextPath}/home/images/insta.jpg" alt="Instagram" /></a>
+        <a href="#"><img src="${pageContext.request.contextPath}/home/images/twitter.jpg" alt="Twitter" /></a>
       </div>
     </div>
   </div>

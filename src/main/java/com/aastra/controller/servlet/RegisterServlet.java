@@ -26,7 +26,6 @@ public class RegisterServlet extends HttpServlet {
 		user.setUserName(username);
 		user.setEmail(email);
 		user.setPassword(EncryptDecrypt.encrypt(password)); // Encrypt before saving
- // Note: In production, hash the password!
 		user.setRole(role);
 
 		try {

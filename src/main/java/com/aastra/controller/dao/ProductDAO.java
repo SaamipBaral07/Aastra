@@ -281,6 +281,36 @@ public class ProductDAO {
 
         return new ArrayList<>(productMap.values());
     }
+    public List<Product> getTopSellingProducts(int limit) throws ClassNotFoundException, Exception {
+        List<Product> topProducts = new ArrayList<>();
+
+        String sql = "SELECT p.*, pi.image_url, SUM(oi.quantity) AS total_sold " +
+                     "FROM products p " +
+                     "JOIN order_items oi ON p.product_id = oi.product_id " +
+                     "LEFT JOIN product_images pi ON p.product_id = pi.product_id " +
+                     "GROUP BY p.product_id " +
+                     "ORDER BY total_sold DESC " +
+                     "LIMIT ?";
+
+        try (Connection conn = DBConnect.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, limit);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                p.setProductId(rs.getInt("product_id"));
+                p.setName(rs.getString("name"));
+                p.setPrice(rs.getDouble("price"));
+                p.setStock(rs.getInt("stock"));
+                p.setImageUrl(rs.getString("image_url")); // now this will not throw error
+
+                topProducts.add(p);
+            }
+        }
+
+        return topProducts;
+    }
+
 
 
 
